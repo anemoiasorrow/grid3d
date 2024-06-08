@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3D Grid Map</title>
+    <script>
+        async function setGridValue() {
+            const x = document.getElementById('x').value;
+            const y = document.getElementById('y').value;
+            const z = document.getElementById('z').value;
+            const value = document.getElementById('value').value;
+
+            const response = await fetch('/set', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ x, y, z, value }),
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        }
+
+        async function getGridValue() {
+            const x = document.getElementById('get-x').value;
+            const y = document.getElementById('get-y').value;
+            const z = document.getElementById('get-z').value;
+
+            const response = await fetch(`/get?x=${x}&y=${y}&z=${z}`);
+            const result = await response.json();
+
+            alert(`Value at (${x}, ${y}, ${z}) is: ${result.value}`);
+        }
+    </script>
+</head>
+<body>
+    <h1>3D Grid Map</h1>
+    <div>
+        <h2>Set Value</h2>
+        <label>X: <input type="number" id="x"></label><br>
+        <label>Y: <input type="number" id="y"></label><br>
+        <label>Z: <input type="number" id="z"></label><br>
+        <label>Value: <input type="text" id="value"></label><br>
+        <button onclick="setGridValue()">Set Value</button>
+    </div>
+    <div>
+        <h2>Get Value</h2>
+        <label>X: <input type="number" id="get-x"></label><br>
+        <label>Y: <input type="number" id="get-y"></label><br>
+        <label>Z: <input type="number" id="get-z"></label><br>
+        <button onclick="getGridValue()">Get Value</button>
+    </div>
+</body>
+</html>
