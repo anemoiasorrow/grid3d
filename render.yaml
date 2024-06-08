@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: my-flask-app
+    env: python
+    runtime: python3
+    buildCommand: ""
+    startCommand: gunicorn app:app
