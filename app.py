@@ -11,7 +11,7 @@ def set_grid_value(x, y, z, value):
 
 # Function to get a value from the grid
 def get_grid_value(x, y, z):
-    return grid.get((x, y, z), None)
+    return grid.get((x, y, z), None)  # Returns None if the coordinate is not set
 
 @app.route('/')
 def index():
@@ -36,4 +36,5 @@ def get_value():
     return jsonify({'x': x, 'y': y, 'z': z, 'value': value})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True)
+
